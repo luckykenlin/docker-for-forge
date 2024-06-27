@@ -1,17 +1,34 @@
 {
-  "name": "ijpatricio/docker-for-forge",
+  "name": "luckykenlin/docker-for-forge",
   "description": "Docker utilities to use Docker within Forge deployed servers.",
+  "keywords": ["laravel", "docker"],
+  "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Ijpatricio\\DockerForForge\\": "src/"
+      "Luckykenlin\\DockerForForge\\": "src/"
     }
+  },
+  "require": {
+    "php": "^8.0|^8.1|^8.2|^8.3",
+    "illuminate/console": "^9.52.16|^10.0|^11.0",
+    "illuminate/contracts": "^9.52.16|^10.0|^11.0",
+    "illuminate/support": "^9.52.16|^10.0|^11.0",
+    "symfony/console": "^6.0|^7.0",
+    "symfony/yaml": "^6.0|^7.0"
   },
   "extra": {
     "laravel": {
-      "providers": "Ijpatricio\\DockerForForge\\DockerForForgeServiceProvider"
+      "providers": [
+        "Luckykenlin\\DockerForForge\\DockerForForgeServiceProvider"
+      ]
     }
   },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require-dev": {
-    "orchestra/testbench": "^7.6"
+    "orchestra/testbench": "^7.0|^8.0|^9.0"
   }
 }

@@ -1,4 +1,4 @@
-FROM node:16 as build_frontend
+FROM node:20 as build_frontend
 
 WORKDIR /app
 COPY . /app
@@ -33,13 +33,16 @@ RUN apt-get update \
     && gpg --export 0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c > /usr/share/keyrings/ppa_ondrej_php.gpg \
     && echo "deb [signed-by=/usr/share/keyrings/ppa_ondrej_php.gpg] https://ppa.launchpadcontent.net/ondrej/php/ubuntu jammy main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
     && apt-get update \
-    && apt-get install -y php8.1-cli php8.1-fpm \
-       php8.1-pgsql php8.1-sqlite3 php8.1-gd \
-       php8.1-curl \
-       php8.1-mysql php8.1-mbstring \
-       php8.1-xml php8.1-zip php8.1-bcmath \
-       php8.1-intl php8.1-readline \
-       php8.1-msgpack php8.1-igbinary php8.1-redis \
+    && apt-get install -y php8.3-cli php8.3-fpm \
+       php8.3-pgsql php8.3-sqlite3 php8.3-gd \
+       php8.3-curl \
+       php8.3-mysql php8.3-mbstring \
+       php8.3-xml php8.3-zip php8.3-bcmath \
+       php8.3-intl php8.3-readline \
+       php8.3-msgpack php8.3-igbinary php8.3-redis php8.3-swoole \
+       php8.3-memcached php8.3-pcov php8.3-imagick \
+       php8.3-ldap \
+       php8.3-soap \
     && curl -sS https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | tee /usr/share/keyrings/pgdg.gpg >/dev/null \
     && echo "deb [signed-by=/usr/share/keyrings/pgdg.gpg] http://apt.postgresql.org/pub/repos/apt jammy-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
     && apt-get update \
@@ -60,9 +63,9 @@ COPY ./docker/production/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/production/nginx_default.conf /etc/nginx/sites-available/default
 
 # PHP
-COPY ./docker/production/php-fpm.conf /etc/php/8.1/fpm/php-fpm.conf
-COPY ./docker/production/www.conf /etc/php/8.1/fpm/pool.d/www.conf
-COPY ./docker/production/php.ini /etc/php/8.1/cli/conf.d/99-php.ini
+COPY ./docker/production/php-fpm.conf /etc/php/8.3/fpm/php-fpm.conf
+COPY ./docker/production/www.conf /etc/php/8.3/fpm/pool.d/www.conf
+COPY ./docker/production/php.ini /etc/php/8.3/cli/conf.d/99-php.ini
 
 # SERVICES
 COPY ./docker/production/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
