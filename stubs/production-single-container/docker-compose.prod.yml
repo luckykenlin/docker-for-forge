@@ -19,8 +19,8 @@ services:
       - web
     labels:
       - traefik.enable=true
-      - traefik.http.routers.{{ $webapp_name }}.entrypoints=https
+      - traefik.http.routers.{{ $webapp_name }}.entryPoints=https
       - traefik.http.routers.{{ $webapp_name }}.rule=Host(`${TRAEFIK_HOST:-{{ $webapp_domain }}}`)
       - traefik.http.routers.{{ $webapp_name }}.service={{ $webapp_name }}
-      - traefik.http.services.{{ $webapp_name }}.loadbalancer.server.port=80
-      - traefik.http.routers.{{ $webapp_name }}.tls.certresolver=leresolver
+      - traefik.http.services.{{ $webapp_name }}.loadBalancer.server.port=80
+      - traefik.http.routers.{{ $webapp_name }}.tls.certResolver=cloudflare
