@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Inspired on https://github.com/adriancooney/Taskfile
+#
+# Install an alias, to be able to simply execute `run`
+# echo 'alias run=./run' >> ~/.aliases
+#
+# alias run=./Taskfile
+# alias help=./Taskfile help
+
+function help {
+    echo "$0 <task> <args>"
+    echo "Tasks:"
+    compgen -A function | cat -n
+}
+
+function default {
+    help
+}
+
+function forgeCmd {
+    docker-compose exec frey_backend bash -c "gosu forge bash -c \"$@\""
+}
+
+TIMEFORMAT="Task completed in %3lR"
+time "${@:-default}"
