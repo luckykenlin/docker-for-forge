@@ -65,7 +65,7 @@ COPY ./docker/production/nginx_default.conf /etc/nginx/sites-available/default
 # PHP
 COPY ./docker/production/php-fpm.conf /etc/php/8.3/fpm/php-fpm.conf
 COPY ./docker/production/www.conf /etc/php/8.3/fpm/pool.d/www.conf
-COPY ./docker/production/php.ini /etc/php/8.3/cli/conf.d/99-php.ini
+COPY ./docker/production/php.ini /etc/php/8.3/cli/conf.d/php.ini
 
 # SERVICES
 COPY ./docker/production/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
